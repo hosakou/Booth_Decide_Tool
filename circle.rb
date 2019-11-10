@@ -1,35 +1,19 @@
 class Circle
-  require 'csv'
-
-  # 乱数呼び出し
-  @rand = Random.new(1)
-
-
-  # 希望状況の取得
-  # 0番目はヘッダーのため呼び出すときは１番から
-  @circle_out = CSV.read('circle_req_out.csv')
-  @circle_in = CSV.read('circle_req_in.csv')
-
-  @circle_out.slice!(0)
-  @circle_in.slice!(0)
-
-  # 企画数取得
-  @len_out = @circle_out.size
-  @len_in = @circle_in.size
-
-  # 決定状況保存用の要素を追加
-  @circle_out.each do |circle|
-    circle << 0
-    circle << @rand.rand
-  end
-
-  @circle_in.each do |circle|
-    circle << 0
-    circle << @rand.rand
-  end
-
+  # 乱数宣言
+  @rnd = Random.new
 
   class << self
+
+    # 決定状況保存用の要素を追加
+    def genSaveRow(circle)
+      if circle[0].size == 6 then
+         circle.each do |c|
+           c << @rnd.rand
+         end
+       end
+       return circle
+    end
+
 
     # 決定した企画の第６要素を1にセット
     def setDecideCircle(circle, decide_num)
@@ -76,7 +60,7 @@ class Circle
 
 
     # 希望場所ごとに整理
-    def getCircleN(circle, booth, num)
+    def getCircleReqBooth(circle, booth, num)
       len = booth.size - 1
 
       circle.each do |c|
