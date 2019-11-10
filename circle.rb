@@ -25,7 +25,7 @@ class Circle
 
 
     # 未決定企画の一覧を取得
-    def getUnDecideNum(circle)
+    def getUnDecideCircle(circle)
       num = 0
       undecide = []
       circle.each do |c|
@@ -61,12 +61,20 @@ class Circle
 
     # 希望場所ごとに整理
     def getCircleReqBooth(circle, booth, num)
+      
       len = booth.size - 1
-
       circle.each do |c|
-
+        
       end
     end
 
-  end
-end
+    def getCircleFromArray(circle, list)
+      undecide = []
+      list.each do |li|
+        undecide << circle[li]
+      end
+      return undecide
+    end
+
+  end # end self
+end # end class

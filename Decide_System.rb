@@ -30,12 +30,14 @@ class Decide_System
   status_out = Booth.getBoothStatus(booth_out)
   status_in = Booth.getBoothStatus(booth_in)
 
-  
+  group_out = Booth.getBoothGroups(booth_out)
+  group_in = Booth.getBoothGroups(booth_in)
+
+
 
   # デバッグ用
-  p circle_out
-  p circle_in
-  p booth_out
-  p booth_in
+  p booth_out, group_out, group_in
 
-end
+
+
+end # end class
