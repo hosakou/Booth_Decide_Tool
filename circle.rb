@@ -54,24 +54,6 @@ class Circle
       end
     end
 
-    # 希望場所ごとに整理
-    def getCircleReqBooth(circle, booth, num)
-      
-      len = booth.size - 1
-      circle.each do |c|
-        
-      end
-    end
-
-
-    def getCircleFromArray(circle, list)
-      undecide = []
-      list.each do |li|
-        undecide << circle[li]
-      end
-      return undecide
-    end
-
 
     # 第n希望の団体を分類分けして取得
     def getCircleByGroup(circle, groups, num)
@@ -87,8 +69,12 @@ class Circle
     def checkGroup(circle, group, num)
       list = []
       circle.each do |c|
-        if c[num] == group then
-         list << c 
+        if c[6] == '0' then
+          if c[num] == group then
+            list << c 
+          end
+        else
+          # 何もしない
         end
       end
       return list
