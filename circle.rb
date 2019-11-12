@@ -5,17 +5,21 @@ class Circle
   class << self
 
     # 決定状況保存用の要素を追加
-    def genSaveRow(circle)
-      if circle[0].size == 6 then
+    def genRand(circle)
+      if circle[0].size == 7 then
          circle.each do |c|
            c << @rnd.rand
          end
-       end
-       return circle
+        else
+          circle.each do |c|
+            c[7] = @rnd.rand
+          end
+      end
+      return circle
     end
 
 
-    # 決定した企画の第６要素を1にセット
+    # 決定した企画の第6要素を1にセット
     def setDecideCircle(circle, decide_num)
       decide_num.each do |num|
         circle[num][6] = 1
@@ -50,15 +54,6 @@ class Circle
       end
     end
 
-
-    # 乱数再生成
-    def genRand(circle)
-      circle.each do |c|
-        c[7] = @rand.rand
-      end
-    end
-
-
     # 希望場所ごとに整理
     def getCircleReqBooth(circle, booth, num)
       
@@ -68,12 +63,35 @@ class Circle
       end
     end
 
+
     def getCircleFromArray(circle, list)
       undecide = []
       list.each do |li|
         undecide << circle[li]
       end
       return undecide
+    end
+
+
+    # 第n希望の団体を分類分けして取得
+    def getCircleByGroup(circle, groups, num)
+      circle_list = {}
+      groups.keys.each do |g|
+        circle_list[g] =  checkGroup(circle, g, num)
+      end
+      return circle_list
+    end
+
+
+    # getCircleByGroups用のメソッド
+    def checkGroup(circle, group, num)
+      list = []
+      circle.each do |c|
+        if c[num] == group then
+         list << c 
+        end
+      end
+      return list
     end
 
   end # end self

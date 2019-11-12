@@ -14,13 +14,21 @@ class Booth
       return available_booth
     end
 
-    # ブース一覧から分類の取得
+    # ブース一覧から分類とブース数
     def getBoothGroups(booth)
       grouplist = []
       booth.each do |b|
         grouplist << b[2]
       end
-      return grouplist.uniq!
+
+      return grouplist.group_by(&:itself).map{ |k, val| [k, val.count] }.to_h
+    end
+
+    # 決定した企画のブースの第3要素を1にセット
+    def setDecideBooth(booth, num)
+      num.each do |n|
+        booth[n][3] = 1
+      end
     end
 
   end # end self
