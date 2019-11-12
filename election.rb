@@ -16,7 +16,7 @@ class Election
         def getDecideCircle(circle_groups, booth_groups)
             booth_groups.each do |group, count|
                 while(circle_groups[group].count > count) do
-                    circle_groups[group].slice!(0)
+                    circle_groups[group].slice!(-1)
                 end
             end
             return circle_groups

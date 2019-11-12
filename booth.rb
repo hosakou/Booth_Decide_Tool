@@ -14,14 +14,28 @@ class Booth
       return available_booth
     end
 
-    # ブース一覧から分類とブース数
+    # ブース一覧から分類と未決定ブース数
     def getBoothGroups(booth)
       grouplist = []
+      decided_booth = []
       booth.each do |b|
-        grouplist << b[2]
+        if b[3] == '0' then
+          grouplist << b[2]
+        else
+          decided_booth << b[2]
+        end
       end
 
-      return grouplist.group_by(&:itself).map{ |k, val| [k, val.count] }.to_h
+        grouplist = grouplist.group_by(&:itself).map{ |k, val| [k, val.count] }.to_h
+        decided_booth = decided_booth.group_by(&:itself).map{ |k, val| [k, val.count] }.to_h
+
+      decided_booth.keys.each do |b|
+        if !grouplist.keys.include?(b) then
+          grouplist.store(b, 0)
+        end
+      end
+
+      return grouplist
     end
 
     # 決定した企画のブースの第3要素を1にセット
@@ -30,6 +44,15 @@ class Booth
         booth[n][3] = 1
       end
     end
+
+    # # ブース分類取得の決定未決定区別しないバージョン
+    # def getAllBoothGroups(booth)
+    #   grouplist = []
+    #   booth.each do |b|
+    #     grouplist << b[2]
+    #   end
+    #   return grouplist.group_by(&:itself).map{ |k, val| [k, val.count] }.to_h
+    # end
 
   end # end self
 end # end class 
