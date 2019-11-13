@@ -30,6 +30,16 @@ class Flow
         end
 
         def runSystemDEBUG(circle, booth, n)
+
+            if n > 5 then
+                Circle.exportUnDecide(circle)
+            end
+
+            if circle.nil? || circle.empty? then
+                # puts("決定しました")
+                return circle, booth
+            end
+
             # 乱数生成
             Circle.genRand(circle)
             # p circle
@@ -44,7 +54,7 @@ class Flow
 
             # 企画の希望で分類
             circleByGroups = Circle.getCircleByGroup(circle, groups, n)
-            p circleByGroups
+            # p circleByGroups
 
             # 上のやつを乱数で降順にソート
             rank = Election.getRank(circleByGroups)
@@ -52,8 +62,14 @@ class Flow
 
             # ブース数まで団体数を削除し、決定を書き出す
             circleOfDecided = Election.getDecideCircle(rank, groups)
-            p circleOfDecided
 
+            
+            # p circleOfDecided
+            
+            circle = Circle.saveCircleResult(circle, circleOfDecided)
+            booth = Booth.saveBoothResult(booth, circleOfDecided)
+            # puts "CIRCLE:#{circle}\nBOOTH:#{booth}"
+            return circle, booth
         end
     end # end self
 

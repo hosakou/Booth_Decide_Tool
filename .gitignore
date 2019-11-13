@@ -2,11 +2,6 @@
 .buildpath
 .project
 
-circle_req_in.csv
-circle_req_out.csv
+result.*
 
-booth_out.csv
-booth_in.csv
-
-result_out.csv
-result_in.csv
+*.csv
