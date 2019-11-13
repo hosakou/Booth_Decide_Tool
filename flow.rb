@@ -9,6 +9,14 @@ class Flow
         # booth:csvから得たブース一覧
         # n:第n希望
         def runSystem(circle, booth, n)
+            
+            if n > 5 then
+                Circle.exportUnDecide(circle)
+            end
+
+            if circle.nil? || circle.empty? then
+                return circle, booth
+            end
 
             # 乱数生成
             Circle.genRand(circle)
@@ -27,6 +35,11 @@ class Flow
 
             # ブース数まで団体数を削除し、決定を書き出す
             circleOfDecided = Election.getDecideCircle(rank, groups)
+            
+            circle = Circle.saveCircleResult(circle, circleOfDecided)
+            booth = Booth.saveBoothResult(booth, circleOfDecided)
+
+            return circle, booth
         end
 
         def runSystemDEBUG(circle, booth, n)
