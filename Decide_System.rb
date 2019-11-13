@@ -31,9 +31,9 @@ class Decide_System
   
   i = 1
   while !(circle_out.nil? || circle_out.empty?) do
-    puts "#{i}回目"
-    circle_out, booth_out = Flow.runSystemDEBUG(circle_out, booth_out, i)
-    puts "circle_out.nil?:#{circle_out.nil?} OR circle_out.empty?:#{circle_out.empty?}"
+    # puts "#{i}回目"
+    circle_out, booth_out = Flow.runSystem(circle_out, booth_out, i)
+    # puts "circle_out.nil?:#{circle_out.nil?} OR circle_out.empty?:#{circle_out.empty?}"
     
     i += 1
   end
