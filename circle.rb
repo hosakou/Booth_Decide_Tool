@@ -104,5 +104,15 @@ class Circle
       # end
     end
 
+
+    def exportUnDecide(circle)
+      circle.each do |c|
+        File.open("undecidedCircle.csv", "a") do |f|
+          f.puts("#{c[0]},#{c[1]},#{c[2]},#{c[3]},#{c[4]},#{c[5]},#{c[6]},#{c[7]}\n")
+        end
+        circle.reject!{|arr| arr = c}
+      end
+    end
+
   end # end self
 end # end class

@@ -31,10 +31,15 @@ class Flow
 
         def runSystemDEBUG(circle, booth, n)
 
-            if circle[0].nil?
-                puts("決定しました")
-                return circle
+            if n > 5 then
+                Circle.exportUnDecide(circle)
             end
+
+            if circle.nil? || circle.empty? then
+                # puts("決定しました")
+                return circle, booth
+            end
+
             # 乱数生成
             Circle.genRand(circle)
             # p circle
@@ -63,6 +68,7 @@ class Flow
             
             circle = Circle.saveCircleResult(circle, circleOfDecided)
             booth = Booth.saveBoothResult(booth, circleOfDecided)
+            # puts "CIRCLE:#{circle}\nBOOTH:#{booth}"
             return circle, booth
         end
     end # end self

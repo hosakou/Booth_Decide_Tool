@@ -20,10 +20,21 @@ class Decide_System
   File.open("result.csv", "w") do |f|
     f.puts("id,団体名,決定場所\n")
   end
-  circle_out,booth_out = Flow.runSystemDEBUG(circle_out, booth_out, 1)
-  circle_out,booth_out = Flow.runSystemDEBUG(circle_out, booth_out, 2)
-  p circle_out
-  circle_out,booth_out = Flow.runSystemDEBUG(circle_out, booth_out, 3)
-  circle_out,booth_out = Flow.runSystemDEBUG(circle_out, booth_out, 4)
-  circle_out,booth_out = Flow.runSystemDEBUG(circle_out, booth_out, 5)
+
+  File.open("result.booth.csv", "w") do |f|
+    f.puts("id,ブース名,Dummy,決定団体\n")
+  end
+  
+  File.open("undecidedCircle.csv", "w") do |f|
+    f.puts("id,団体名,第1希望,第2希望,第3希望,第4希望,第5希望,決定状況\n")
+  end
+  
+  i = 1
+  while !(circle_out.nil? || circle_out.empty?) do
+    puts "#{i}回目"
+    circle_out, booth_out = Flow.runSystemDEBUG(circle_out, booth_out, i)
+    puts "circle_out.nil?:#{circle_out.nil?} OR circle_out.empty?:#{circle_out.empty?}"
+    
+    i += 1
+  end
 end # end class
