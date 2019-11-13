@@ -17,5 +17,13 @@ class Decide_System
   booth_in.slice!(0)
 
   # システムの実行
-  Flow.runSystemDEBUG(circle_out, booth_out, 1)
+  File.open("result.csv", "w") do |f|
+    f.puts("id,団体名,決定場所\n")
+  end
+  circle_out,booth_out = Flow.runSystemDEBUG(circle_out, booth_out, 1)
+  circle_out,booth_out = Flow.runSystemDEBUG(circle_out, booth_out, 2)
+  p circle_out
+  circle_out,booth_out = Flow.runSystemDEBUG(circle_out, booth_out, 3)
+  circle_out,booth_out = Flow.runSystemDEBUG(circle_out, booth_out, 4)
+  circle_out,booth_out = Flow.runSystemDEBUG(circle_out, booth_out, 5)
 end # end class

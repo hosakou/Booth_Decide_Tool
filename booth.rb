@@ -6,7 +6,7 @@ class Booth
       available_booth = []
       i = 0
       booth.each do |b|
-        if b[3] == '0'
+        if b[4] == '0'
           available_booth << i
         end
         i += 1
@@ -19,10 +19,10 @@ class Booth
       grouplist = []
       decided_booth = []
       booth.each do |b|
-        if b[3] == '0' then
-          grouplist << b[2]
+        if b[4] == '0' then
+          grouplist << b[3]
         else
-          decided_booth << b[2]
+          decided_booth << b[3]
         end
       end
 
@@ -41,18 +41,15 @@ class Booth
     # 決定した企画のブースの第3要素を1にセット
     def setDecideBooth(booth, num)
       num.each do |n|
-        booth[n][3] = 1
+        booth[n][4] = 1
       end
     end
 
-    # # ブース分類取得の決定未決定区別しないバージョン
-    # def getAllBoothGroups(booth)
-    #   grouplist = []
-    #   booth.each do |b|
-    #     grouplist << b[2]
-    #   end
-    #   return grouplist.group_by(&:itself).map{ |k, val| [k, val.count] }.to_h
-    # end
+
+    def saveBoothResult(raw_booth, booth)
+      
+
+    end
 
   end # end self
 end # end class 
